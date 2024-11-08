@@ -33,8 +33,6 @@ SERVER_GIT_REPO_URL=$SERVER_GIT_REPO_URL
 SERVER_GIT_BRANCH=$SERVER_GIT_BRANCH
 WEB_GIT_REPO_URL=$WEB_GIT_REPO_URL
 WEB_GIT_BRANCH=$WEB_GIT_BRANCH
-MVN_USERNAME=$MVN_USERNAME
-MVN_PASSWORD=$MVN_PASSWORD
 BASE_SERVER_IMAGE=${BASE_SERVER_IMAGE:-"$DOCKER_REPO/server:$PRODUCTION_TAG"}
 BASE_WEB_IMAGE=${BASE_WEB_IMAGE:-"$DOCKER_REPO/web:$PRODUCTION_TAG"}
 
@@ -83,8 +81,6 @@ function do_build() {
     --build-arg "WEB_GIT_BRANCH=${WEB_GIT_BRANCH}" \
     --build-arg "BASE_SERVER_IMAGE=${BASE_SERVER_IMAGE}" \
     --build-arg "BASE_WEB_IMAGE=${BASE_WEB_IMAGE}" \
-    --build-arg "MVN_USERNAME=${MVN_USERNAME}" \
-    --build-arg "MVN_PASSWORD=${MVN_PASSWORD}" \
     -t "${DOCKER_REPO}/${PRODUCTION_NAME}:${PRODUCTION_TAG}" \
     -f "${DOCKER_FILE:-${CONTEXT_DIR}/${PRODUCTION_NAME}.dockerfile}" \
     "${args[@]}" \
@@ -126,8 +122,6 @@ show_help() {
   echo "  SERVER_GIT_BRANCH=origin/master                                         Server git branch"
   echo "  WEB_GIT_REPO_URL=https://github.com/beaver-iot/web.git                  Web git repository"
   echo "  WEB_GIT_BRANCH=origin/master                                            Web git branch"
-  echo "  MVN_USERNAME                                                            Maven repository username"
-  echo "  MVN_PASSWORD                                                            Maven repository password"
   echo "  BASE_SERVER_IMAGE                                                       Server base image for monolith image build"
   echo "  BASE_WEB_IMAGE                                                          Web base image for monolith image build"
   exit 0
